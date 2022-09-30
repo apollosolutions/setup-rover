@@ -1,0 +1,24 @@
+{
+  "name": "@apollosolutions/github-actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "homepage": "https://github.com/apollosolutions/github-actions#readme",
+  "author": "Apollo Solutions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apollosolutions/github-actions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apollosolutions/github-actions/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/tool-cache": "^2.0.1"
+  }
+}
