@@ -1,0 +1,16 @@
+on: [pull_request]
+
+jobs:
+  install-rover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run the install action
+        uses: ./ # Uses an action in the root directory
+        with:
+          version: 'latest'
+
+      # Test Rover is installed
+      - name: Run rover commands
+        run: rover --version
