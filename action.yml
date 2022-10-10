@@ -3,9 +3,9 @@ description: "Include the Rover CLI in your action for simple installation"
 author: Apollo Solutions
 inputs:
   version:
-    description: 'Rover version to install. This is the full string including prefixes e.g v0.9.0'
+    description: 'Rover version to install. This is the full string including prefixes e.g "v0.9.0"'
     required: false
     default: 'latest'
 runs:
   using: "node16"
-  main: index.js
+  main: dist/index.js

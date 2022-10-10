@@ -5,9 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: npm i
 
       - name: Run the install action
-        uses: ./ # Uses an action in the root directory
+        uses: ./ # Uses the action in the root directory
         with:
           version: 'latest'
 

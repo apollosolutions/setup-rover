@@ -18,10 +18,10 @@ async function run() {
     core.info(`Rover ${version} is installed`)
 }
 
-async function installRover(url, resolvedVersion) {
-    const tarPath = await toolCache.downloadTool(url)
+async function installRover(url, version) {
+    const tarPath = await toolCache.downloadTool(url);
     const extractedPath = await toolCache.extractTar(tarPath)
-    const cachedPath = await toolCache.cacheDir(extractedPath, 'rover', resolvedVersion)
+    const cachedPath = await toolCache.cacheDir(extractedPath, 'rover', version)
     core.addPath(cachedPath)
 }
 
