@@ -37,8 +37,8 @@ async function installRover(url, version, arch) {
     const downloadPath = await toolCache.downloadTool(url);
     const extract = url.endsWith('.zip') ? toolCache.extractZip : toolCache.extractTar;
     const extractedPath = await extract(downloadPath);
-    const pathToCli = await toolCache.cacheDir(extractedPath, 'rover', version, arch);
-    return path.join(pathToCli, 'dist');
+    const pathToCli = path.join(extractedPath, 'dist');
+    return toolCache.cacheDir(pathToCli, 'rover', version, arch);
 }
 
 module.exports = setup;
