@@ -9,7 +9,7 @@ inputs:
   arch:
     description: 'Machine architecture that Rover has downloads for. See https://github.com/apollographql/rover/releases'
     required: false
-    default: 'aarch64-unknown-linux-gnu'
+    default: 'x86_64-unknown-linux-gnu'
 runs:
   using: "node16"
   main: dist/index.js

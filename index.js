@@ -8,6 +8,11 @@ async function run() {
     const url = `https://github.com/apollographql/rover/releases/download/${version}/${tarFileName}.tar.gz`;
     core.info(`Downloading Rover from ${url}`);
 
+    //Real
+    //https://github.com/apollographql/rover/releases/download/v0.9.1/rover-v0.9.1-x86_64-unknown-linux-gnu.tar.gz
+    //Generated
+    //https://github.com/apollographql/rover/releases/download/v0.9.1/rover-v0.9.1-aarch64-unknown-linux-gnu.tar.gz
+
     // Install the resolved version if necessary
     const toolPath = toolCache.find('rover', version);
     if (toolPath) {
