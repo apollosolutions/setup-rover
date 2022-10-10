@@ -10,7 +10,7 @@ async function setup() {
         const url = `https://github.com/apollographql/rover/releases/download/${version}/${tarFileName}.tar.gz`;
         core.info(`Downloading Rover from ${url}`);
 
-        const toolPath = await getPath(url, version, arch);
+        const toolPath = await getPath(url, version);
         core.addPath(toolPath);
         core.info(`Rover ${version} is installed at ${toolPath}`);
     } catch (error) {
@@ -22,23 +22,23 @@ async function setup() {
     }
 }
 
-async function getPath(url, version, arch) {
-    const toolPath = toolCache.find('rover', version, arch);
+async function getPath(url, version) {
+    const toolPath = toolCache.find('rover', version);
     if (toolPath) {
         core.info('Rover is already installed on tool path');
         return toolPath;
     } else {
         core.info('Rover not found on tool path. Downloading file');
-        return installRover(url, version, arch);
+        return installRover(url, version);
     }
 }
 
-async function installRover(url, version, arch) {
+async function installRover(url, version) {
     const downloadPath = await toolCache.downloadTool(url);
     const extract = url.endsWith('.zip') ? toolCache.extractZip : toolCache.extractTar;
     const extractedPath = await extract(downloadPath);
     const pathToCli = path.join(extractedPath, 'dist');
-    return toolCache.cacheDir(pathToCli, 'rover', version, arch);
+    return toolCache.cacheDir(pathToCli, 'rover', version);
 }
 
 module.exports = setup;
