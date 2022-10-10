@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const toolCache = require('@actions/tool-cache');
+const path = require('path');
 
 async function setup() {
     try {
@@ -36,7 +37,8 @@ async function installRover(url, version, arch) {
     const downloadPath = await toolCache.downloadTool(url);
     const extract = url.endsWith('.zip') ? toolCache.extractZip : toolCache.extractTar;
     const extractedPath = await extract(downloadPath);
-    return toolCache.cacheDir(extractedPath, 'rover', version, arch);
+    const pathToCli = await toolCache.cacheDir(extractedPath, 'rover', version, arch);
+    return path.join(pathToCli, 'dist');
 }
 
 module.exports = setup;
