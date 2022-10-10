@@ -1,4 +1,12 @@
-on: [pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   install-rover:
@@ -13,4 +21,5 @@ jobs:
 
       # Test Rover is installed
       - name: Run rover commands
-        run: rover --version
+        run: |
+          rover --version
