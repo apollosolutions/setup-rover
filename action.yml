@@ -3,9 +3,9 @@ description: "Include the Rover CLI in your action for simple installation"
 author: Apollo Solutions
 inputs:
   version:
-    description: 'Rover version to install. This is the full string including prefixes e.g "v0.9.0"'
+    description: 'Rover version to install. This is the full string including prefixes e.g "v0.9.1"'
     required: false
-    default: 'latest'
+    default: 'v0.9.1'
   arch:
     description: 'Machine architecture that Rover has downloads for. See https://github.com/apollographql/rover/releases'
     required: false

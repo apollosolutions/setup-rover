@@ -10,8 +10,6 @@ jobs:
 
       - name: Run the install action
         uses: ./ # Uses the action in the root directory
-        with:
-          version: 'latest'
 
       # Test Rover is installed
       - name: Run rover commands
