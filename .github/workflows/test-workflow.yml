@@ -12,7 +12,7 @@ jobs:
   install-rover:
     runs-on: ubuntu-latest
     steps:
-      - uses: github-developer/setup-gh@main
+      - uses: github-developer/example-setup-gh@main
       - run: |
           gh --version
 
