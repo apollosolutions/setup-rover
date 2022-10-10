@@ -6,6 +6,10 @@ inputs:
     description: 'Rover version to install. This is the full string including prefixes e.g "v0.9.0"'
     required: false
     default: 'latest'
+  arch:
+    description: 'Machine architecture that Rover has downloads for. See https://github.com/apollographql/rover/releases'
+    required: false
+    default: 'aarch64-unknown-linux-gnu'
 runs:
   using: "node16"
   main: dist/index.js

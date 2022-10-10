@@ -2,10 +2,11 @@ const core = require('@actions/core');
 const toolCache = require('@actions/tool-cache');
 
 async function run() {
-    // Get version to install (defaults to "latest")
     const version = core.getInput('version');
-    const url = `https://rover.apollo.dev/nix/${version}`;
-    core.info(`Downloading Rover ${version} from ${url}`);
+    const arch = core.getInput('arch');
+    const tarFileName = `rover-${version}-${arch}`;
+    const url = `https://github.com/apollographql/rover/releases/download/${version}/${tarFileName}.tar.gz`;
+    core.info(`Downloading Rover from ${url}`);
 
     // Install the resolved version if necessary
     const toolPath = toolCache.find('rover', version);
