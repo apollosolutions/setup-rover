@@ -12,10 +12,6 @@ jobs:
   install-rover:
     runs-on: ubuntu-latest
     steps:
-      - uses: github-developer/setup-gh@main
-      - run: |
-          gh --version
-
       - uses: actions/checkout@v3
       - run: npm i
       - run: npm run all
@@ -24,7 +20,7 @@ jobs:
       - name: Run the install action
         uses: ./
 
-      # Test Rover is installed
+      # Test Rover is properly installed
       - name: Run rover commands
         run: |
           rover --version
