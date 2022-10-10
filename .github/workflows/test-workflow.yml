@@ -16,8 +16,9 @@ jobs:
       - run: npm i
       - run: npm run all
 
+      # Uses the action in the root directory
       - name: Run the install action
-        uses: ./ # Uses the action in the root directory
+        uses: ./
 
       # Test Rover is installed
       - name: Run rover commands
