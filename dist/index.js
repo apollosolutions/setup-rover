@@ -3,46 +3,40 @@ require('./sourcemap-register.js');module.exports =
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 932:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(186);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(784);
-/* harmony import */ var _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__);
-
-
+const core = __webpack_require__(186);
+const toolCache = __webpack_require__(784);
 
 async function run() {
     // Get version to install (defaults to "latest")
-    const version = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('version');
+    const version = core.getInput('version');
     const url = `https://rover.apollo.dev/nix/${version}`;
 
     // Install the resolved version if necessary
-    const toolPath = _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.find('rover', version)
+    const toolPath = toolCache.find('rover', version)
     if (toolPath) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.addPath(toolPath)
+        core.addPath(toolPath)
     } else {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Downloading Rover ${version} from ${url}...`)
+        core.info(`Downloading Rover ${version} from ${url}...`)
         await installRover(url, version)
     }
 
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Rover ${version} is installed`)
+    core.info(`Rover ${version} is installed`)
 }
 
 async function installRover(url, version) {
-    const tarPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool(url);
-    const extractedPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.extractTar(tarPath)
-    const cachedPath = await _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheDir(extractedPath, 'rover', version)
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.addPath(cachedPath)
+    const tarPath = await toolCache.downloadTool(url);
+    const extractedPath = await toolCache.extractTar(tarPath)
+    const cachedPath = await toolCache.cacheDir(extractedPath, 'rover', version)
+    core.addPath(cachedPath)
 }
 
 run().catch((error) => {
     if (error instanceof Error) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message)
+        core.setFailed(error.message)
     } else {
-        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`${error}`)
+        core.setFailed(`${error}`)
     }
 })
 

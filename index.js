@@ -1,5 +1,5 @@
-import * as core from '@actions/core';
-import * as toolCache from '@actions/tool-cache';
+const core = require('@actions/core');
+const toolCache = require('@actions/tool-cache');
 
 async function run() {
     // Get version to install (defaults to "latest")
