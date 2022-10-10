@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  install-rover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: github-developer/setup-gh@main
+      - run: |
+          gh --version
+
+      - uses: actions/checkout@v3
+      - run: npm i
+      - run: npm run all
+
+      # Uses the action in the root directory
+      - name: Run the install action
+        uses: ./
+
+      # Test Rover is installed
+      - name: Run rover commands
+        run: |
+          rover --version

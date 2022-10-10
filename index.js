@@ -1,34 +1,46 @@
-import * as core from '@actions/core';
-import * as toolCache from '@actions/tool-cache';
+const core = require('@actions/core');
+const toolCache = require('@actions/tool-cache');
 
-async function run() {
-    // Get version to install (defaults to "latest")
-    const version = core.getInput('version');
-    const url = `https://rover.apollo.dev/nix/${version}`;
+async function setup() {
+    try {
+        const version = core.getInput('version');
+        const arch = core.getInput('arch');
+        const tarFileName = `rover-${version}-${arch}`;
+        const url = `https://github.com/apollographql/rover/releases/download/${version}/${tarFileName}.tar.gz`;
+        core.info(`Downloading Rover from ${url}`);
 
-    // Install the resolved version if necessary
-    const toolPath = toolCache.find('rover', version)
+        const toolPath = await getPath(url, version, arch);
+        core.addPath(toolPath);
+        core.info(`Rover ${version} is installed at ${toolPath}`);
+    } catch (error) {
+        if (error instanceof Error) {
+            core.setFailed(error.message);
+        } else {
+            core.setFailed(`${error}`);
+        }
+    }
+}
+
+async function getPath(url, version, arch) {
+    const toolPath = toolCache.find('rover', version, arch);
     if (toolPath) {
-        core.addPath(toolPath)
+        core.info('Rover is already installed on tool path');
+        return toolPath;
     } else {
-        core.info(`Downloading Rover ${version} from ${url}...`)
-        await installRover(url, version)
+        core.info('Rover not found on tool path. Downloading file');
+        return installRover(url, version, arch);
     }
-
-    core.info(`Rover ${version} is installed`)
 }
 
-async function installRover(url, resolvedVersion) {
-    const tarPath = await toolCache.downloadTool(url)
-    const extractedPath = await toolCache.extractTar(tarPath)
-    const cachedPath = await toolCache.cacheDir(extractedPath, 'rover', resolvedVersion)
-    core.addPath(cachedPath)
+async function installRover(url, version, arch) {
+    const downloadPath = await toolCache.downloadTool(url);
+    const extract = url.endsWith('.zip') ? toolCache.extractZip : toolCache.extractTar;
+    const extractedPath = await extract(downloadPath);
+    return toolCache.cacheDir(extractedPath, 'rover', version, arch);
 }
 
-run().catch((error) => {
-    if (error instanceof Error) {
-        core.setFailed(error.message)
-    } else {
-        core.setFailed(`${error}`)
-    }
-})
+module.exports = setup;
+
+if (require.main === module) {
+    setup();
+}
