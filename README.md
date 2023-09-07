@@ -1,5 +1,13 @@
 # setup-rover
 
+## ⚠️ Project Archived ⚠️
+
+Please checkout our new repo which contains an eaiser Rover setup and built in actions to check and publish your subgraphs:
+
+https://apollograph.slack.com/archives/C04TKRKLV2M/p1694104973922899
+
+### Setup
+
 Install the Rover binary to be used in GitHub Actions
 
 **The code in this repository is experimental and has been provided for reference purposes only. Community feedback is welcome but this project may not be supported in the same way that repositories in the official [Apollo GraphQL GitHub organization](https://github.com/apollographql) are. If you need help you can file an issue on this repository, [contact Apollo](https://www.apollographql.com/contact-sales) to talk to an expert, or create a ticket directly in Apollo Studio.**
