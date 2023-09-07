@@ -4,7 +4,7 @@
 
 Please checkout our new repo which contains an eaiser Rover setup and built in actions to check and publish your subgraphs:
 
-https://apollograph.slack.com/archives/C04TKRKLV2M/p1694104973922899
+https://github.com/apollosolutions/rover-actions
 
 ### Setup
 
